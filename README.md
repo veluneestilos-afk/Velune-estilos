@@ -2,29 +2,27 @@
 
 Loja virtual da VELUNE. Estilo. Presença. Identidade.
 
-Site em um único arquivo (`index.html`), sem instalação e sem servidor.
+O site roda em um pequeno servidor Node (sem dependências). Os produtos cadastrados no painel ficam salvos no servidor, então **não precisa mais enviar arquivo pro GitHub a cada mudança**.
 
-## Recursos
+## Arquivos
 
-- Tela de abertura com o logo da marca
-- Busca por nome do produto e filtro por categoria (Casaco, Short, Camisa, Tênis, Sapato, Calça, Óculos, Cordão, Relógio e Pulseira)
-- Página do produto com fotos, preço, desconto, tamanhos, descrição, avaliações e vídeo
-- Carrinho com pedido pelo WhatsApp, cupom de desconto e frete grátis
-- Painel do dono para cadastrar produtos, links, vídeos e avaliações
+- `index.html`: o site completo
+- `server.js`: servidor que serve o site e guarda os produtos
+- `package.json`: diz ao Railway como iniciar
 
-## Como publicar (GitHub Pages)
+## Configurar no Railway (uma única vez)
 
-1. Envie o arquivo `index.html` para este repositório.
-2. Vá em **Settings > Pages**.
-3. Em **Branch**, escolha `main` e a pasta `/ (root)`, e salve.
-4. O site fica disponível em `https://SEU-USUARIO.github.io/NOME-DO-REPOSITORIO/`.
+1. Envie `index.html`, `server.js` e `package.json` para o repositório.
+2. No Railway, abra o serviço e vá em **Variables**. Crie:
+   - `ADMIN_PASSWORD` = a senha que você quiser para publicar
+   - `DATA_DIR` = `/data`
+3. Em **Volumes** (ou clique direito no serviço > Add Volume), crie um volume com o caminho de montagem `/data`. Sem o volume, os produtos somem quando o Railway reiniciar.
+4. Aguarde o deploy terminar.
 
-## Painel do dono
+## Usar o painel
 
-1. Abra o site com `?admin` no final do endereço:
-   `https://SEU-USUARIO.github.io/NOME-DO-REPOSITORIO/?admin`
-2. Clique em **Painel do dono** e cadastre produtos, WhatsApp, Instagram, cupom e frete grátis.
-3. Clique em **Publicar**. Será baixado um novo `index.html`.
-4. Envie esse arquivo para o repositório, substituindo o antigo (**Add file > Upload files**).
+1. Abra o site com `?admin` no final do endereço.
+2. Toque em **Painel do dono**, cadastre os produtos e toque em **Publicar**.
+3. Digite a senha. Pronto: os clientes já veem as mudanças.
 
-O painel não altera a loja ao vivo. Só vale o que for enviado ao GitHub.
+Tinha produtos em um `index.html` baixado antes? No painel, use **Importar produtos de um index.html baixado antes** e depois toque em **Publicar**.
